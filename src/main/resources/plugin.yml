@@ -1,0 +1,12 @@
+main: cc.squirtle.GamePrompt.App
+name: GamePrompt
+version: 0.1
+author: squirtlecc
+
+  # Replace "test" with the name of your command.
+commands:
+   gameprompt:
+      aliases: [sgp,gmotd]
+      description: setting your server prompt when player join in your server
+      usage: /gameprompt [add|remove|set] [name] <context>
+      # permission: yourplugin.yourcommandpermission
