@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import cc.squirtle.Entity.CmdResult;
+import cc.squirtle.GamePrompt.Bean.PlayersEntity;
 
 public class GamePromptCmd implements CommandExecutor{
         // This method is called, when somebody uses our command
@@ -20,6 +21,18 @@ public class GamePromptCmd implements CommandExecutor{
             CmdResult.PlayerPrint(ply, CmdResult.RAINBOW("GamePrompt Plugins is called!") );
             return true;
         }
+
+        if(args.length == 1){
+            if(args[0].equalsIgnoreCase("dl") || args[0].equalsIgnoreCase("deathlocation")){
+                if(PlayersEntity.PLAYERS_DEATH_LOCATION.containsKey(ply.getUniqueId())){
+                    CmdResult.PlayerPrint(ply, CmdResult.NOTICE(PlayersEntity.PLAYERS_DEATH_LOCATION.get(ply.getUniqueId())));
+                }else{
+                    CmdResult.PlayerPrint(ply, CmdResult.NOTICE("你并没有死亡过"));
+                }
+                
+            }
+        }
+
         return false;
         
     }
