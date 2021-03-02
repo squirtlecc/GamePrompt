@@ -1,10 +1,10 @@
 join:
-  broadcast: 
+  broadcast:
     player-welcome: "欢迎新人：%playername% 加入游戏~"
     player-join: "%playername% 重返游戏!"
     player-quit: "%playername% 退出游戏..."
   dispatch:
-    notices: 
+    notices:
       # add ' - ' mean this key-value map type
       - kaihei: "服务器社区 -> https://kaihei.co/HIHPPK  <- 点击进入"
     commands:
