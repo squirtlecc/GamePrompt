@@ -17,7 +17,20 @@ repositories {
 
 
 dependencies {
+    //implementation("com.mapzen:on-the-road:1.3.2")
     implementation(kotlin("stdlib"))
     compileOnly(spigot("1.16.5"))
     testCompile("junit", "junit", "4.12")
 }
+//tasks.withType<Jar> {
+//    // Otherwise you'll get a "No main manifest attribute" error
+//
+//
+//    // To add all of the dependencies
+//    from(sourceSets.main.get().output)
+//
+//    dependsOn(configurations.runtimeClasspath)
+//    from({
+//        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+//    })
+//}

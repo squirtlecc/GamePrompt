@@ -9,11 +9,11 @@ import java.lang.*
 object DealString {
     fun RanbowString(rawString: String): String {
         val buffer = StringBuffer()
-        var result: String = ""
+        var result: String
         if (Bukkit.getVersion().contains("1.16")) {
             //hex color
             //Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
-            for (ch in rawString!!.toCharArray()) {
+            for (ch in rawString.toCharArray()) {
                 val random_color =
                     "#" + java.lang.Long.toHexString(Math.round(7777777 * 2 - Math.random() * 7777777))
                 buffer.append(ChatColor.of(random_color).toString() + ch)
@@ -22,7 +22,7 @@ object DealString {
         } else {
             val r = Random()
             //boolean check_vailable = false;
-            for (ch in rawString!!.toCharArray()) {
+            for (ch in rawString.toCharArray()) {
                 val randomColour = PluginConfig.CHAT_COLOR[r.nextInt(21)] //You need to do the get random colour part ;)
                 //bai(int)Math.random() * ConfigKV.CHAT_COLOR.length
                 //chat_color total type = 21

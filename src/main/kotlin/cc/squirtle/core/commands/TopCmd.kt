@@ -7,14 +7,15 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
+
 class TopCmd : CommandExecutor {
     // This method is called, when somebody uses our command
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean {
         if (sender !is Player) {
             return true
         }
-        val ply = sender
-        if (args.size == 0) {
+        val ply: Player = sender
+        if (args.isEmpty()) {
             // when command no args
             CmdResult.Send2Player(ply, CmdResult.RAINBOW("GamePrompt Plugins is called!"))
             return true

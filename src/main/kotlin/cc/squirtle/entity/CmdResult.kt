@@ -42,6 +42,16 @@ class CmdResult<T>
 
 
 
+    /**
+     * send message to console
+     * ex:Entity.Send2Console(Entity.SUCCESS("success"))
+     */
+    fun <T> Send2Console(msg: CmdResult<T>){
+        var result = msg.toString()
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', result))
+    }
+
+
 
 
 
@@ -50,7 +60,8 @@ companion object {
     fun <T> SUCCESS(data: T): CmdResult<T> {
         return CmdResult(ResType.SUCCESS.type,ResType.SUCCESS.title,data)
     }
-    fun <T>  FAILED(data: T): CmdResult<T> {
+
+    fun <T> FAILED(data: T): CmdResult<T> {
         return CmdResult(ResType.FAILED.type,ResType.FAILED.title,data)
     }
 
@@ -75,16 +86,6 @@ companion object {
     }
 
     /**
-     * send message to console
-     * ex:Entity.Send2Console(Entity.SUCCESS("success"))
-     */
-    fun <T> Send2Console(msg: CmdResult<T>){
-        var result = msg.toString()
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', result))
-    }
-
-
-    /**
      * send Message to single-player
      * @param player
      * @param cmdResult
@@ -105,6 +106,7 @@ companion object {
             Send2Player(ply, cmdResult)
         }
     }
+
 
 }
 
