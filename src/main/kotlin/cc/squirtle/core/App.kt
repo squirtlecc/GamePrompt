@@ -59,7 +59,6 @@ class App :JavaPlugin() {
         try {
             player_listener.RegisterListener()
             //this.server.pluginManager.registerEvents(player_listener,this)
-
         }catch (e: Throwable){
             CmdResult.FAILED("GamePrompt Plugin cant Register Events").Send2Console()
             return false
