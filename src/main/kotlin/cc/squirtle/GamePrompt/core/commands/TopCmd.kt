@@ -1,4 +1,4 @@
-package cc.squirtle.GamePrompt.Commands
+package cc.squirtle.GamePrompt.core.commands
 
 
 import cc.squirtle.entity.CmdResult
@@ -10,14 +10,15 @@ import org.bukkit.entity.Player
 
 class TopCmd : CommandExecutor {
     // This method is called, when somebody uses our command
-    override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean {
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender !is Player) {
+            CmdResult.INFO("Console dont need prompt!").Send2Console()
             return true
         }
         val ply: Player = sender
         if (args.isEmpty()) {
             // when command no args
-            CmdResult.Send2Player(ply, CmdResult.RAINBOW("GamePrompt Plugins is called!"))
+            CmdResult.RAINBOW("GamePrompt Plugins is called!").Send2Player(ply)
             return true
         }
 //        if (args.size == 1) {
@@ -29,6 +30,6 @@ class TopCmd : CommandExecutor {
 //                }
 //            }
 //        }
-        return false
+        return true
     }
 }
