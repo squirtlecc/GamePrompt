@@ -5,6 +5,7 @@ import net.md_5.bungee.api.ChatColor
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.util.*
+import java.lang.*
 
 class CmdResult<T>
     (type: Int?, title: String?, data: T?){
@@ -21,7 +22,7 @@ class CmdResult<T>
             }
             102 -> {
                 msg = "${this.title} ${this.data}"
-                msg = DealString.RanbowString(msg)
+                msg = DealString.RanbowString(msg?:"")
             }
             else -> {
                 msg = "${this.title} ${this.data}"
@@ -36,21 +37,34 @@ class CmdResult<T>
      * ex:Entity.SUCCESS("success").Send2Console()
      */
     fun Send2Console(){
-        var result = this.toString()
+        var result: String? = this.toString()
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', result))
     }
+
 
 
 
     /**
-     * send message to console
-     * ex:Entity.Send2Console(Entity.SUCCESS("success"))
+     * send Message to single-player
+     * @param player
+     * @param cmdResult
      */
-    fun <T> Send2Console(msg: CmdResult<T>){
-        var result = msg.toString()
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', result))
+    fun Send2Player(player: Player) {
+        // result name
+        var result = this.toString()
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', result))
     }
 
+    /**
+     * send  Message to mulit-player
+     * @param players
+     * @param cmdResult
+     */
+    fun Send2Player(players: Collection<Player>) {
+        for (ply in players) {
+            Send2Player(ply)
+        }
+    }
 
 
 
@@ -81,7 +95,7 @@ companion object {
         return CmdResult(ResType.UNAVAIL.type, ResType.UNAVAIL.title, data)
     }
 
-    fun <T> RAINBOW(data: T): CmdResult<T> {
+    fun <T> RAINBOW(data: T?): CmdResult<T> {
         return CmdResult(ResType.RAINBOW.type, ResType.RAINBOW.title, data)
     }
 
@@ -105,6 +119,17 @@ companion object {
         for (ply in players) {
             Send2Player(ply, cmdResult)
         }
+    }
+
+
+
+    /**
+     * send message to console
+     * ex:Entity.Send2Console(Entity.SUCCESS("success"))
+     */
+    fun <T> Send2Console(msg: CmdResult<T>){
+        var result = msg.toString()
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', result))
     }
 
 

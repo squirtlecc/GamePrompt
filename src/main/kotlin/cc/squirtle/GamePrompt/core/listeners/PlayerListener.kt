@@ -1,11 +1,10 @@
-package cc.squirtle.GamePrompt.Listeners
+package cc.squirtle.GamePrompt.core.listeners
 
-
-import cc.squirtle.core.App
+import cc.squirtle.GamePrompt.App
 import cc.squirtle.entity.CmdResult
 import cc.squirtle.entity.PluginEntity
 import org.bukkit.Bukkit
-import org.bukkit.entity.Player
+
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -18,29 +17,33 @@ import org.bukkit.plugin.PluginManager
  * Listener player event when they playing game
  * PlayerListener
  */
-class PlayerListener(instance: App?) : Listener {
-//    companion object {
-//        var instance: App? = null
-//    }
-    val instance: App? = instance
-//    constructor(instance: App?) {
-//        Companion.instance = instance
-//    }
+class PlayerListener(instance: App) : Listener {
+    private var instance: App = instance
+
+    companion object{
+    }
+    fun RegisterListener(): PluginManager {
+        val pm = instance.server.pluginManager
+        pm.registerEvents(PlayerListener(instance), instance)
+        //pm.registerEvent(PlayerJoinEvents,this,EventPriority.LOW,Player)
+        return pm
+    }
+
 
     @EventHandler(priority = EventPriority.LOWEST)
-    fun PlayerJoinON(event: PlayerJoinEvent) {
-        val player = event.player
+    fun PlayerJoin(event: PlayerJoinEvent?) {
+        val player = event!!.player
 
         //get plugin config
         if (player.isOnline) {
             if (player.hasPlayedBefore()) {
-                CmdResult.Send2Player(Bukkit.getOnlinePlayers(),
-                    CmdResult.RAINBOW(PluginEntity.FILE_CONFIG!!.getString("join.broadcast.player-jin")!!
-                        .replace("%playername%", player.name)))
+                CmdResult.RAINBOW(PluginEntity.FILE_CONFIG!!.getString("join.broadcast.player-join")!!
+                    .replace("%playername%", player.name)).Send2Player(Bukkit.getOnlinePlayers())
+
             } else {
-                CmdResult.Send2Player(player,
-                    CmdResult.RAINBOW(PluginEntity.FILE_CONFIG!!.getString("join.broadcast.player-welcome")!!
-                        .replace("%playername%", player.name)))
+                CmdResult.RAINBOW(PluginEntity.FILE_CONFIG!!.getString("join.broadcast.player-welcome")!!
+                    .replace("%playername%", player.name)).Send2Player(Bukkit.getOnlinePlayers())
+
             }
             /**
              * prompt server commands
@@ -63,19 +66,19 @@ class PlayerListener(instance: App?) : Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    fun PlayerQuit(event: PlayerQuitEvent) {
-        val ply = event.player
+    fun PlayerQuit(event: PlayerQuitEvent?) {
+        val ply = event!!.player
         if (ply.hasPlayedBefore()) {
-            CmdResult.Send2Player(Bukkit.getOnlinePlayers(),
-                CmdResult.NOTICE(PluginEntity.FILE_CONFIG!!.getString("join.broadcast.player-quit")!!
-                    .replace("%playername%", ply.name)))
+            CmdResult.RAINBOW(PluginEntity.FILE_CONFIG!!.getString("join.broadcast.player-quit")!!
+                .replace("%playername%", ply.name)).Send2Player(Bukkit.getOnlinePlayers())
+
             return
         }
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    fun PlayerDeath(event: PlayerDeathEvent) {
-        val ply = event.entity
+    fun PlayerDeath(event: PlayerDeathEvent?) {
+        val ply = event!!.entity
         //如果玩家在线 才给他发送消息
         if (ply.isOnline) {
             //to do
@@ -93,11 +96,7 @@ class PlayerListener(instance: App?) : Listener {
         }
     }
 
-    fun RegisterListener(): PluginManager {
-        val pm = instance!!.server.pluginManager
-        pm.registerEvents(PlayerListener(instance), instance)
-        return pm
-    }
+
 
 
 }

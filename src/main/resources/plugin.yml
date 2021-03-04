@@ -8,5 +8,5 @@ commands:
   gameprompt:
     aliases: [sgp,gmotd]
     description: setting your server prompt when player join in your server
-    usage: /gameprompt [sset|dl] [add|remove] [name] <context>
+    usage: /<command> [sset|dl] [add|remove] [name] <context>
     # permission: yourplugin.yourcommandpermission
