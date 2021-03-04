@@ -18,8 +18,6 @@ class App : JavaPlugin()  {
     /* Constructor used for tests. */
 //    internal constructor(loader: JavaPluginLoader, description: PluginDescriptionFile, dataFolder: File, file: File)
 //            : super(loader, description, dataFolder, file)
-
-
     companion object{
 
     }
