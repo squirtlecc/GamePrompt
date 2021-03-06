@@ -1,6 +1,6 @@
 package cc.squirtle.util
 
-import cc.squirtle.entity.PluginConfig
+import cc.squirtle.GamePrompt.entity.PluginConfig
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.Bukkit
 import java.util.*
@@ -15,7 +15,7 @@ object DealString {
             //Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
             for (ch in rawString!!.toCharArray()) {
                 val random_color =
-                    "#" + java.lang.Long.toHexString(Math.round(7777777 * 2 - Math.random() * 7777777)?:0)
+                    "#" + java.lang.Long.toHexString(Math.round(7777777 * 2 - Math.random() * 7777777))
                 buffer.append(ChatColor.of(random_color?:"").toString() + ch)
             }
             result = ChatColor.translateAlternateColorCodes('&', buffer.toString())

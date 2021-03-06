@@ -1,4 +1,4 @@
-package cc.squirtle.entity
+package cc.squirtle.GamePrompt.entity
 
 import cc.squirtle.util.DealString
 import net.md_5.bungee.api.ChatColor
@@ -17,7 +17,7 @@ class CmdResult<T>
         var msg :String
         when(this.type){
             203 -> {
-                this.title = this.title!!.replace("%name%".toRegex(), PluginEntity.PLUGIN_DESCFILE!!.name)
+                this.title = this.title!!.replace("%plugin_name%".toRegex(), PluginEntity.PLUGIN_DESCFILE!!.name)
                 msg = "${this.title} ${this.data}"
             }
             102 -> {
@@ -37,7 +37,7 @@ class CmdResult<T>
      * ex:Entity.SUCCESS("success").Send2Console()
      */
     fun Send2Console(){
-        var result: String? = this.toString()
+        val result: String? = this.toString()
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', result))
     }
 
@@ -47,18 +47,16 @@ class CmdResult<T>
     /**
      * send Message to single-player
      * @param player
-     * @param cmdResult
      */
     fun Send2Player(player: Player) {
         // result name
-        var result = this.toString()
+        val result = this.toString()
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', result))
     }
 
     /**
      * send  Message to mulit-player
      * @param players
-     * @param cmdResult
      */
     fun Send2Player(players: Collection<Player>) {
         for (ply in players) {
@@ -102,11 +100,10 @@ companion object {
     /**
      * send Message to single-player
      * @param player
-     * @param cmdResult
      */
     fun <T> Send2Player(player: Player, msg: CmdResult<T>) {
         // result name
-        var result = msg.toString()
+        val result = msg.toString()
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', result))
     }
 
@@ -128,7 +125,7 @@ companion object {
      * ex:Entity.Send2Console(Entity.SUCCESS("success"))
      */
     fun <T> Send2Console(msg: CmdResult<T>){
-        var result = msg.toString()
+        val result = msg.toString()
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', result))
     }
 

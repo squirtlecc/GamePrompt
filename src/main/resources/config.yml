@@ -9,3 +9,4 @@ join:
       - kaihei: "服务器社区 -> https://kaihei.co/HIHPPK  <- 点击进入"
     commands:
       - sps: "/sps < show | hide > 显示或关闭排行榜插件"
+

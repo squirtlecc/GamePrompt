@@ -1,8 +1,9 @@
 package cc.squirtle.GamePrompt.core.listeners
 
 import cc.squirtle.GamePrompt.App
-import cc.squirtle.entity.CmdResult
-import cc.squirtle.entity.PluginEntity
+import cc.squirtle.GamePrompt.entity.CmdResult
+import cc.squirtle.GamePrompt.entity.PlayersEntity
+import cc.squirtle.GamePrompt.entity.PluginEntity
 import org.bukkit.Bukkit
 
 import org.bukkit.event.EventHandler
@@ -18,7 +19,7 @@ import org.bukkit.plugin.PluginManager
  * PlayerListener
  */
 class PlayerListener(instance: App) : Listener {
-    private var instance: App = instance
+    private val instance: App = instance
 
     companion object{
     }
@@ -86,12 +87,12 @@ class PlayerListener(instance: App) : Listener {
             val death_locate =
                 "(" + death_location.x.toInt() + ", " + death_location.y.toInt() + ", " + death_location.z
                     .toInt() + ")"
-            val death_message = death_location.world!!.name + "," + death_locate
+            val death_message = "于${death_location.world!!.name} 被 ${ply.lastDamageCause?.entityType?.name} 杀死在 ${death_locate}"
             // 向玩家发送上次死亡地点
-            CmdResult.Send2Player(ply, CmdResult.NOTICE("死亡地点: $death_message"))
+            CmdResult.Send2Player(ply, CmdResult.NOTICE(" $death_message"))
 
             //TODO: add command to send last death place
-            //PluginEntity.PLAYERS_DEATH_LOCATION.put(ply.uniqueId, "上次的死亡地点: $death_message")
+            PlayersEntity.PLAYERS_DEATH_LOCATION[ply.uniqueId] = death_message
             return
         }
     }

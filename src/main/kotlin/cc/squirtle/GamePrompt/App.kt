@@ -1,9 +1,9 @@
 package cc.squirtle.GamePrompt
 
-import cc.squirtle.GamePrompt.core.commands.TopCmd
+import cc.squirtle.GamePrompt.core.commands.ManageCmds
 import cc.squirtle.GamePrompt.core.listeners.PlayerListener
-import cc.squirtle.entity.CmdResult
-import cc.squirtle.entity.PluginEntity
+import cc.squirtle.GamePrompt.entity.CmdResult
+import cc.squirtle.GamePrompt.entity.PluginEntity
 
 import org.bukkit.Bukkit
 
@@ -26,13 +26,10 @@ class App : JavaPlugin()  {
     override fun onEnable(){
 
         InitInstance()
-        PluginLoadMsgs()
-        PluginRegisterEvents()
-        this.getCommand("gameprompt")?.setExecutor(TopCmd())
-        //
-//        if (PluginRegisterCmds() && PluginRegisterEvents()) {
-//            PluginLoadMsgs()
-//        }
+
+        if (PluginRegisterCmds() && PluginRegisterEvents()) {
+            PluginLoadMsgs()
+        }
         //Bukkit.getConsoleSender().sendMessage(Entity.SUCCESS("data").title)
     }
 
@@ -61,8 +58,8 @@ class App : JavaPlugin()  {
      */
     private fun PluginRegisterCmds(): Boolean {
         try {
-            getCommand("gameprompt")?.setExecutor(TopCmd())
-            CmdResult.SUCCESS(getCommand("gameprompt").toString())
+            ManageCmds.RegisterCmds("gameprompt")
+            CmdResult.SUCCESS(this.getCommand("gameprompt").toString())
         } catch (e: Throwable) {
             CmdResult.FAILED("GamePrompt Plugins cant Register Commands!").Send2Console()
             return false
@@ -90,8 +87,8 @@ class App : JavaPlugin()  {
      * when plugins successful loading, console to remind messages
      */
     private fun PluginLoadMsgs(){
-        CmdResult.SUCCESS("Plugin Enable now").Send2Console()
-        CmdResult.SUCCESS("Minecraft Version: ${Bukkit.getBukkitVersion()}").Send2Console()
+        CmdResult.NAME("Plugin Enable now").Send2Console()
+        CmdResult.NAME("Minecraft Version: ${Bukkit.getBukkitVersion()}").Send2Console()
 
     }
 
@@ -99,7 +96,7 @@ class App : JavaPlugin()  {
      * when plugins disable ,to print messages
      */
     private fun SendMsgOnDisable(){
-        CmdResult.FAILED("Plugin Disable now").Send2Console()
+        CmdResult.FAILED("GamePrompt Plugin Disable now").Send2Console()
     }
 
 }

@@ -1,4 +1,4 @@
-package cc.squirtle.entity
+package cc.squirtle.GamePrompt.entity
 
 //val type: Int, val title: String
 enum class ResType(val type: Int, val title: String) {
@@ -7,7 +7,7 @@ enum class ResType(val type: Int, val title: String) {
     FAILED(401, "&4[Failed]"),  //红色
     NOTICE(201, "&6[Notice]"),  //黄色
     INFO(202, "&e[Info]"),  //金色
-    NAME(203, "&a[%name%]"),  //浅绿
+    NAME(203, "&a[%plugin_name%]"),  //浅绿
     UNAVAIL(301, "&8[Unavail]"),  //灰色
     RAINBOW(102, "");
 

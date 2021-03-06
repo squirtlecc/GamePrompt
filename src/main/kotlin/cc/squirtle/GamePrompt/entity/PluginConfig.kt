@@ -1,4 +1,4 @@
-package cc.squirtle.entity
+package cc.squirtle.GamePrompt.entity
 
 object PluginConfig {
     val PLUGIN_NAME: String?

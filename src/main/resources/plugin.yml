@@ -7,6 +7,10 @@ author: squirtlecc
 commands:
   gameprompt:
     aliases: [sgp,gmotd]
-    description: setting your server prompt when player join in your server
-    usage: /<command> [sset|dl] [add|remove] [name] <context>
+    description: setting your server prompt when player in your server
+    usage: |
+      Use /help <command> to get more information about this plugins
+      - /<command> [dm|deathmsg] - get last death message
+      - /<command> list - list all gameprompt in game
+      - /<command> set - setting gameprompt in game
     # permission: yourplugin.yourcommandpermission
