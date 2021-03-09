@@ -1,6 +1,7 @@
 package cc.squirtle.GamePrompt
 
 import cc.squirtle.GamePrompt.core.commands.ManageCmds
+import cc.squirtle.GamePrompt.core.listeners.MotdListener
 import cc.squirtle.GamePrompt.core.listeners.PlayerListener
 import cc.squirtle.GamePrompt.entity.CmdResult
 import cc.squirtle.GamePrompt.entity.PluginEntity
@@ -48,9 +49,8 @@ class App : JavaPlugin()  {
 
         // load the default configuration file to your plugin's folder
         //https://sodocumentation.net/bukkit/topic/6824/configuration-files
-
-        this.saveDefaultConfig()
         this.reloadConfig()
+        this.saveDefaultConfig()
     }
 
     /**
@@ -74,6 +74,7 @@ class App : JavaPlugin()  {
 
         try {
             PlayerListener(this).RegisterListener()
+            MotdListener(this).RegisterListener()
             //this.server.pluginManager.registerEvents(PlayerListener(this),this)
         }catch (e: Throwable){
             println(e)

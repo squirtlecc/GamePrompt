@@ -21,11 +21,9 @@ import org.bukkit.plugin.PluginManager
 class PlayerListener(instance: App) : Listener {
     private val instance: App = instance
 
-    companion object{
-    }
     fun RegisterListener(): PluginManager {
         val pm = instance.server.pluginManager
-        pm.registerEvents(PlayerListener(instance), instance)
+        pm.registerEvents(this, instance)
         //pm.registerEvent(PlayerJoinEvents,this,EventPriority.LOW,Player)
         return pm
     }
@@ -37,30 +35,34 @@ class PlayerListener(instance: App) : Listener {
 
         //get plugin config
         if (player.isOnline) {
+            var join_msg = event.joinMessage
             if (player.hasPlayedBefore()) {
-                CmdResult.RAINBOW(PluginEntity.FILE_CONFIG!!.getString("join.broadcast.player-join")!!
-                    .replace("%playername%", player.name)).Send2Player(Bukkit.getOnlinePlayers())
+                join_msg = CmdResult.RAINBOW(PluginEntity.FILE_CONFIG!!.getString("join.broadcast.player-join")!!
+                    .replace("%playername%", player.name)).toString()
 
             } else {
-                CmdResult.RAINBOW(PluginEntity.FILE_CONFIG!!.getString("join.broadcast.player-welcome")!!
-                    .replace("%playername%", player.name)).Send2Player(Bukkit.getOnlinePlayers())
+                join_msg = CmdResult.RAINBOW(PluginEntity.FILE_CONFIG!!.getString("join.broadcast.player-welcome")!!
+                    .replace("%playername%", player.name)).toString()
 
             }
+
+            event.joinMessage = join_msg
+
             /**
              * prompt server commands
              */
-            val commands_list: List<Map<*, *>> = PluginEntity.FILE_CONFIG!!.getMapList("join.dispatch.commands")
-            for ((_, value) in commands_list[0]) {
-                CmdResult.Send2Player(player,
-                    CmdResult.NOTICE(value.toString()))
+            val commands_list: List<*>? = PluginEntity.FILE_CONFIG!!.getList("join.dispatch.commands")
+
+            for (value in commands_list!!) {
+                CmdResult.INFO(value.toString()).Send2Player(player)
             }
             /**
              * prompt server notices
              */
-            val notices_list: List<Map<*, *>> = PluginEntity.FILE_CONFIG!!.getMapList("join.dispatch.notices")
-            for ((_, value) in notices_list[0]) {
-                CmdResult.Send2Player(player,
-                    CmdResult.NOTICE(value.toString()))
+            val notices_list: List<*>? = PluginEntity.FILE_CONFIG!!.getList("join.dispatch.notices")
+
+            for (value in commands_list!!) {
+                CmdResult.NOTICE(value.toString()).Send2Player(player)
             }
             return
         }
@@ -70,9 +72,9 @@ class PlayerListener(instance: App) : Listener {
     fun PlayerQuit(event: PlayerQuitEvent?) {
         val ply = event!!.player
         if (ply.hasPlayedBefore()) {
-            CmdResult.RAINBOW(PluginEntity.FILE_CONFIG!!.getString("join.broadcast.player-quit")!!
-                .replace("%playername%", ply.name)).Send2Player(Bukkit.getOnlinePlayers())
-
+            //
+            event.quitMessage = CmdResult.RAINBOW(PluginEntity.FILE_CONFIG!!.getString("quit.broadcast.player-quit")!!
+                .replace("%playername%", ply.name)).toString()
             return
         }
     }

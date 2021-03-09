@@ -2,11 +2,24 @@ join:
   broadcast:
     player-welcome: "欢迎新人：%playername% 加入游戏~"
     player-join: "%playername% 重返游戏!"
-    player-quit: "%playername% 退出游戏..."
   dispatch:
     notices:
       # add ' - ' mean this key-value map type
-      - kaihei: "服务器社区 -> https://kaihei.co/HIHPPK  <- 点击进入"
+      - "服务器社区 -> https://kaihei.co/HIHPPK  <- 点击进入"
     commands:
-      - sps: "/sps < show | hide > 显示或关闭排行榜插件"
+      - "/sps [show|hide] 显示或关闭排行榜插件"
+
+quit:
+  broadcast:
+    player-quit: "%playername% 退出游戏..."
+
+motd:
+  enabled: true
+  display:
+    main:
+      - "&b&l&m-----------[&r&6&l 进来挨骂! &b&l&m]-----------"
+    intro:
+      - " &e&l交流社区: &f https://kaihe.co/qH2400 "
+      - " &b在?  来点 &e&r&l矿工 &b!!! "
+
 
