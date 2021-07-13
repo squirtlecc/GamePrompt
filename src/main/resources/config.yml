@@ -17,9 +17,7 @@ motd:
   enabled: true
   display:
     main:
-      - "&b&l&m-----------[&r&6&l 进来挨骂! &b&l&m]-----------"
+      - "&b&l&m-----------[&r&6&l 进来挨骂! &b&l&m]-----------&r"
     intro:
-      - " &e&l交流社区: &f https://kaihe.co/qH2400 "
-      - " &b在?  来点 &e&r&l矿工 &b!!! "
-
-
+      - "&r&e&l交流社区: &f https://kaihei.co/qH2400 "
+      - "&r&a在?  来点 &8&l矿工 &a!!! "

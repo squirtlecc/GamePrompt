@@ -22,7 +22,7 @@ class CmdResult<T>
             }
             102 -> {
                 msg = "${this.title} ${this.data}"
-                msg = DealString.RanbowString(msg?:"")
+                msg = DealString.RanbowString(msg)
             }
             else -> {
                 msg = "${this.title} ${this.data}"
@@ -67,70 +67,79 @@ class CmdResult<T>
 
 
 
-companion object {
+    companion object {
 
-    fun <T> SUCCESS(data: T): CmdResult<T> {
-        return CmdResult(ResType.SUCCESS.type,ResType.SUCCESS.title,data)
-    }
-
-    fun <T> FAILED(data: T): CmdResult<T> {
-        return CmdResult(ResType.FAILED.type,ResType.FAILED.title,data)
-    }
-
-    fun <T> NOTICE(data: T): CmdResult<T> {
-        return CmdResult(ResType.NOTICE.type, ResType.NOTICE.title, data)
-    }
-
-    fun <T> INFO(data: T): CmdResult<T> {
-        return CmdResult(ResType.INFO.type, ResType.INFO.title, data)
-    }
-
-    fun <T> NAME(data: T): CmdResult<T> {
-        return CmdResult(ResType.NAME.type, ResType.NAME.title, data)
-    }
-
-    fun <T> UNAVAIL(data: T): CmdResult<T> {
-        return CmdResult(ResType.UNAVAIL.type, ResType.UNAVAIL.title, data)
-    }
-
-    fun <T> RAINBOW(data: T?): CmdResult<T> {
-        return CmdResult(ResType.RAINBOW.type, ResType.RAINBOW.title, data)
-    }
-
-    /**
-     * send Message to single-player
-     * @param player
-     */
-    fun <T> Send2Player(player: Player, msg: CmdResult<T>) {
-        // result name
-        val result = msg.toString()
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', result))
-    }
-
-    /**
-     * send  Message to mulit-player
-     * @param players
-     * @param cmdResult
-     */
-    fun <T> Send2Player(players: Collection<Player>, cmdResult: CmdResult<T>) {
-        for (ply in players) {
-            Send2Player(ply, cmdResult)
+        fun <T> SUCCESS(data: T): CmdResult<T> {
+            return CmdResult(ResType.SUCCESS.type,ResType.SUCCESS.title,data)
         }
+
+        fun <T> FAILED(data: T): CmdResult<T> {
+            return CmdResult(ResType.FAILED.type,ResType.FAILED.title,data)
+        }
+
+        fun <T> NOTICE(data: T): CmdResult<T> {
+            return CmdResult(ResType.NOTICE.type, ResType.NOTICE.title, data)
+        }
+
+        fun <T> INFO(data: T): CmdResult<T> {
+            return CmdResult(ResType.INFO.type, ResType.INFO.title, data)
+        }
+
+        fun <T> NAME(data: T): CmdResult<T> {
+            return CmdResult(ResType.NAME.type, ResType.NAME.title, data)
+        }
+
+        fun <T> UNAVAIL(data: T): CmdResult<T> {
+            return CmdResult(ResType.UNAVAIL.type, ResType.UNAVAIL.title, data)
+        }
+
+        fun <T> RAINBOW(data: T?): CmdResult<T> {
+            return CmdResult(ResType.RAINBOW.type, ResType.RAINBOW.title, data)
+        }
+
+        /**
+         * send Message to single-player
+         * @param player
+         */
+        fun <T> Send2Player(player: Player, msg: CmdResult<T>) {
+            // result name
+            val result = msg.toString()
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', result))
+        }
+
+        /**
+         * send  Message to mulit-player
+         * @param players
+         * @param cmdResult
+         */
+        fun <T> Send2Player(players: Collection<Player>, cmdResult: CmdResult<T>) {
+            for (ply in players) {
+                Send2Player(ply, cmdResult)
+            }
+        }
+
+        /**
+         * send  Message to mulit-player
+         * @param players
+         * @param cmdResult
+         */
+        fun <T> Send2AllPlayer(cmdResult: CmdResult<T>) {
+            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', cmdResult.toString()))
+        }
+
+
+
+        /**
+         * send message to console
+         * ex:Entity.Send2Console(Entity.SUCCESS("success"))
+         */
+        fun <T> Send2Console(msg: CmdResult<T>){
+            val result = msg.toString()
+            Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', result))
+        }
+
+
     }
-
-
-
-    /**
-     * send message to console
-     * ex:Entity.Send2Console(Entity.SUCCESS("success"))
-     */
-    fun <T> Send2Console(msg: CmdResult<T>){
-        val result = msg.toString()
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', result))
-    }
-
-
-}
 
 
 

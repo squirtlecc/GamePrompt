@@ -61,7 +61,7 @@ class PlayerListener(instance: App) : Listener {
              */
             val notices_list: List<*>? = PluginEntity.FILE_CONFIG!!.getList("join.dispatch.notices")
 
-            for (value in commands_list!!) {
+            for (value in notices_list!!) {
                 CmdResult.NOTICE(value.toString()).Send2Player(player)
             }
             return

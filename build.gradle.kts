@@ -6,9 +6,10 @@ version = "0.2"
 
 plugins {
     // basic dependencies java and kotlin jvm
-    id("java")
-    kotlin("jvm") version "1.4.31"
-
+    //id("java")
+    //kotlin("jvm") version "1.4.31"
+    java
+    kotlin("jvm") version "1.5.10"
     // cant commands
     // easy to using spigot dependencies
     // https://plugins.gradle.org/plugin/kr.entree.spigradle
@@ -38,9 +39,11 @@ dependencies {
     // basic dependencies
     implementation(kotlin("stdlib"))
     //compileOnly(spigot("1.16.5"))
-    compileOnly("org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT")
     // test jar
-    testCompile("junit", "junit", "4.12")
+    testImplementation(kotlin("test"))
+//    testCompileOnly("junit", "junit", "4.12")
+//    testCompile("junit", "junit", "4.12")
 
 }
 
